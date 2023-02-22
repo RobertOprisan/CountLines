@@ -1,22 +1,27 @@
 import java.io.*;
-
-class CountLinesMain {
+public class CountLines {
     public static void main(String[] args) throws IOException {
         if (args.length < 1) {
-            System.err.println("Usage: CountLines <file name>");
+            System.err.println("Usage: CountLines <input file>");
             System.exit(1);
         }
-        BufferedReader in = null;
-
+        BufferedReader input = null;
+        String line;
+        int countLines = 0;
         try {
-            in = new BufferedReader(new FileReader(args[0]));
+            input = new BufferedReader(new FileReader(args[0]));
+            while ((line = input.readLine()) != null) {
+                countLines++;
+            }
+            System.out.println("The file has " + countLines + " lines.");
         } catch (FileNotFoundException ex) {
-            System.err.println("File " + args[0] + " not found");
+            System.out.println("File not found");
+        } catch (IOException ex) {
+            System.out.println("Error reading file");
         } finally {
-            if (in != null);
-            in.close();
+            if (input != null) {
+                input.close();
+            }
         }
-
-
     }
 }
